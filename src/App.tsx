@@ -1,23 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src="https://image.freepik.com/free-vector/realistic-receipt-template_23-2147938550.jpg" className="main-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          할인 쿠폰의 새로운 전환<br/>
+          <strong>아마따</strong>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
