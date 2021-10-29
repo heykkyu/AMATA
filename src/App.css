@@ -38,8 +38,9 @@
 }
 
 
-@keyframes fadeOut {
-  0% {
+@keyframes appload-fadeout {
+  0%,
+  50% {
     opacity: 1;
   }
   100% {

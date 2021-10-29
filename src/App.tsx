@@ -15,9 +15,8 @@ function App() {
       <AppLoad/>
       <h1>{amount}</h1>
       <button onClick={() => depositMoney(1000)}>Deposit</button>
-      <button onClick={() => depositMoney(500)}>Withdarw</button>
+      <button onClick={() => withdrawMoney(500)}>Withdarw</button>
       <button onClick={() => bankrupt()}>Bankrupt</button>
-    
     </div>
   );
 }
