@@ -1,16 +1,23 @@
 import React from 'react';
+import AppLoad from "./views/AppLoad";
 import './App.css';
+import { useDispatch, useSelector } from "react-redux"
+import { bindActionCreators } from 'redux';
+import { actionCreators, State } from './state';
 
 function App() {
+  const dispatch = useDispatch();
+  const { depositMoney, withdrawMoney, bankrupt } = bindActionCreators(actionCreators, dispatch);
+  const amount = useSelector((state: State) => state.bank)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src="https://image.freepik.com/free-vector/realistic-receipt-template_23-2147938550.jpg" className="main-logo" alt="logo" />
-        <p>
-          할인 쿠폰의 새로운 전환<br/>
-          <strong>아마따</strong>
-        </p>
-      </header>
+      <AppLoad/>
+      <h1>{amount}</h1>
+      <button onClick={() => depositMoney(1000)}>Deposit</button>
+      <button onClick={() => depositMoney(500)}>Withdarw</button>
+      <button onClick={() => bankrupt()}>Bankrupt</button>
+    
     </div>
   );
 }
