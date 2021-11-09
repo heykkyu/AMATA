@@ -12,7 +12,7 @@ const AppLoadDiv = styled.div`
   z-index: 1;
   text-align: center;
   background-color: white;
-  animation: 4.5s appload-fadeout;
+  animation: 5.5s appload-fadeout;
 `
 const AppLoadDivCenter = styled.div`
   position: absolute;
@@ -32,7 +32,7 @@ const AppLoad = () => {
   useEffect(() => {
     setTimeout(() => {
       setShow(false)
-    }, (4000));
+    }, (5000));
   }, [])
 
   return (
@@ -47,8 +47,8 @@ const AppLoad = () => {
             play
           />
           <AppLoadText>
-            <p>영수증으로&nbsp;적립받는 신개념&nbsp;서비스</p>
-            <strong>AMATA</strong>
+            <p>내 택배는 어디에?</p>
+            <strong>쟁구택배</strong>
           </AppLoadText>
         </AppLoadDivCenter>
       </AppLoadDiv>
