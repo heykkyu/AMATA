@@ -48,7 +48,7 @@ const AppLoad = () => {
           />
           <AppLoadText>
             <p>내 택배는 어디에?</p>
-            <strong>쟁구택배</strong>
+            <strong>브라운박스</strong>
           </AppLoadText>
         </AppLoadDivCenter>
       </AppLoadDiv>
