@@ -1,6 +1,5 @@
-import React from 'react';
 import AppLoad from "./views/AppLoad";
-import GlobalNav from "./components/common/GlobalNav";
+import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
 import './App.css';
 import { useDispatch, useSelector } from "react-redux"
@@ -15,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <AppLoad/>
-      <GlobalNav/>
+      <GlobalBar/>
       <h1>{amount}</h1>
       <button onClick={() => depositMoney(1000)}>Deposit</button>
       <button onClick={() => withdrawMoney(500)}>Withdarw</button>
