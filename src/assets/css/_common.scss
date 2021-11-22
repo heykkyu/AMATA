@@ -1,0 +1,25 @@
+* {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+@keyframes appload-fadeout {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+a {
+  text-decoration: unset;
+  color: unset;
+}

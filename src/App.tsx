@@ -1,25 +1,28 @@
 import AppLoad from "./views/AppLoad";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
+import ParcelList from "./views/ParcelList";
+import ParcelAdd from "./views/ParcelAdd";
+import ParcelProfile from "./views/ParcelProfile";
 import './App.css';
-import { useDispatch, useSelector } from "react-redux"
-import { bindActionCreators } from 'redux';
-import { actionCreators, State } from './state';
+import "@src/assets/css/_common.scss";
+
 
 function App() {
-  const dispatch = useDispatch();
-  const { depositMoney, withdrawMoney, bankrupt } = bindActionCreators(actionCreators, dispatch);
-  const amount = useSelector((state: State) => state.bank)
 
   return (
     <div className="App">
-      <AppLoad/>
-      <GlobalBar/>
-      <h1>{amount}</h1>
-      <button onClick={() => depositMoney(1000)}>Deposit</button>
-      <button onClick={() => withdrawMoney(500)}>Withdarw</button>
-      <button onClick={() => bankrupt()}>Bankrupt</button>
-      <GlobalMap/>
+      <Router>
+        <GlobalBar/>
+        <AppLoad/>
+        <Routes>
+          <Route path='/' element={<ParcelList/>} />
+          <Route path='/add' element={<ParcelAdd/>} />
+          <Route path='/profile' element={<ParcelProfile/>} />
+        </Routes>
+        <GlobalMap/>
+      </Router>
     </div>
   );
 }
