@@ -13,6 +13,7 @@ const AppLoadDiv = styled.div`
   text-align: center;
   background-color: white;
   animation: 5.5s appload-fadeout;
+  z-index: 1000;
 `
 const AppLoadDivCenter = styled.div`
   position: absolute;
@@ -20,7 +21,7 @@ const AppLoadDivCenter = styled.div`
   left: 50%;
   transform: translate(-50%,-50%);
 `
-const AppLoadText = styled.p`
+const AppLoadText = styled.div`
   word-break: keep-all;
   strong {
     font-size: 30px;

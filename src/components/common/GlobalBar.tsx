@@ -16,7 +16,7 @@ const LogoBar = styled.div`
   }
 
 `
-const LogoTitle = styled.p`
+const LogoTitle = styled.span`
   font-family: 'Anton', sans-serif;
   font-size: 18px;
   margin: 0;

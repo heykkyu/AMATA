@@ -1,3 +1,5 @@
 export const logo_list = [
-  "naver"
+  "naver",
+  "cj",
+  "apple"
 ]
