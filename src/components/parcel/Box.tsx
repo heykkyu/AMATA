@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { logo_list }from "@src/assets/data/LogoList"
+import { logo_list } from "@src/assets/data/LogoList";
+import default_box from "@src/assets/img/logo-box.png";
 
 interface Props {
   type: String;
@@ -31,6 +32,8 @@ const ParcelListWrap = styled.div`
 const Block = styled.div`
   display: flex;
   padding: 0 10px 10px;
+  min-height: 60px;
+  box-sizing: border-box;
   &:hover {
     cursor: pointer;
     opacity: .7;
@@ -78,16 +81,13 @@ const BlockShopImg = styled.img`
 `
 
 const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
+
   return (
     <>
       <ParcelListWrap>
         <Block>
-          {/* <BlockCarrierImg
-            src={require(`@src/assets/img/logo-${carrier?.name && logo_list.includes(carrier?.name) ? carrier?.name?.toLocaleLowerCase() : 'box'}.png`).default}
-            alt={carrier?.name}
-          /> */}
           <BlockCarrierImg
-            src={require(`@src/assets/img/logo-box.png`).default}
+            src={logo_list.find((e) => e.name === carrier?.name?.toLocaleLowerCase())?.url || default_box }
             alt={carrier?.name}
           />
           <BlockParcelInfo>
@@ -95,12 +95,8 @@ const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
             <BlockParcelInfoText type="status">{delivery?.status}</BlockParcelInfoText>
           </BlockParcelInfo>
           {shop?.name && (
-            // <BlockShopImg
-            //   src={require(`@src/assets/img/logo-${logo_list.includes(shop.name.toLocaleLowerCase()) ? shop.name.toLocaleLowerCase() : 'box'}.png`).default}
-            //   alt={shop.name}
-            // />
             <BlockShopImg
-              src={require(`@src/assets/img/logo-box.png`).default}
+              src={logo_list.find((e) => e.name === shop?.name?.toLocaleLowerCase())?.url || default_box }
               alt={shop.name}
             />
           )}
