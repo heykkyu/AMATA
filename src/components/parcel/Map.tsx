@@ -2,16 +2,17 @@ import { useEffect } from 'react';
 import styled from 'styled-components'
 import MapMarker from "@src/assets/img/map-marker-purple.png";
 
-const ParcelMapWrap = styled.div`
+const ParcelMapWrap = styled.div<Props>`
   #map {
     width: 100%;
-    height: 150px;
+    height: ${(props) => props.from === 'list' ? '150px' : '50vh'};
     position: relative;
     margin-bottom: 20px;
   }
 `
 
-interface ParcelInfo {
+interface Props {
+  from: String,
   carrier?: {
     name?: string;
     tracking_no?: string;
@@ -32,7 +33,7 @@ interface ParcelInfo {
   };
 }
 
-const ParcelMap = ({carrier, shop, product, delivery}: ParcelInfo) => {
+const ParcelMap = ({carrier, shop, product, delivery, from}: Props) => {
   useEffect(() => {
     if (carrier?.tracking_no) {
       const kakao = (window as any).kakao;
@@ -99,7 +100,7 @@ const ParcelMap = ({carrier, shop, product, delivery}: ParcelInfo) => {
 
   return (
     <>
-      <ParcelMapWrap>
+      <ParcelMapWrap from={from}>
         <div id="map"></div>
       </ParcelMapWrap>
     </>

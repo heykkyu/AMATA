@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
 import ParcelList from "./views/ParcelList";
+import ParcelDetail from "./views/ParcelDetail";
 import ParcelAdd from "./views/ParcelAdd";
 import ParcelProfile from "./views/ParcelProfile";
 import './App.css';
@@ -18,6 +19,7 @@ function App() {
         <AppLoad/>
         <Routes>
           <Route path='/' element={<ParcelList/>} />
+          <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
           <Route path='/add' element={<ParcelAdd/>} />
           <Route path='/profile' element={<ParcelProfile/>} />
         </Routes>
