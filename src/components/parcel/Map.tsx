@@ -5,7 +5,7 @@ import MapMarker from "@src/assets/img/map-marker-purple.png";
 const ParcelMapWrap = styled.div<Props>`
   #map {
     width: 100%;
-    height: ${(props) => props.from === 'list' ? '150px' : '50vh'};
+    height: ${(props) => props.from === 'list' ? '150px' : '40vh'};
     position: relative;
     margin-bottom: 20px;
   }

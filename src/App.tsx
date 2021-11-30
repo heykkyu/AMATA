@@ -2,6 +2,7 @@ import AppLoad from "./views/AppLoad";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
+import AuthLogin from "./components/auth/Login";
 import ParcelList from "./views/ParcelList";
 import ParcelDetail from "./views/ParcelDetail";
 import ParcelAdd from "./views/ParcelAdd";
@@ -18,6 +19,7 @@ function App() {
         <GlobalBar/>
         <AppLoad/>
         <Routes>
+          <Route path='/login' element={<AuthLogin/>} />
           <Route path='/' element={<ParcelList/>} />
           <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
           <Route path='/add' element={<ParcelAdd/>} />
