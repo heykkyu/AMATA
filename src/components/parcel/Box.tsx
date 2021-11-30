@@ -81,7 +81,6 @@ const BlockShopImg = styled.img`
 `
 
 const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
-
   return (
     <>
       <ParcelListWrap>
