@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AppLoad from "./views/AppLoad";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
@@ -7,11 +8,19 @@ import ParcelList from "./views/ParcelList";
 import ParcelDetail from "./views/ParcelDetail";
 import ParcelAdd from "./views/ParcelAdd";
 import ParcelProfile from "./views/ParcelProfile";
+
+import { signIn } from '@src/state/auth/auth';
+
 import './App.css';
 import "@src/assets/css/_common.scss";
 
 
 function App() {
+  const [user, setUser] = useState(null);
+  const authenticated = user != null;
+
+  // const login = ({ email, password }) => setUser(signIn({ email, password }));
+  const logout = () => setUser(null);
 
   return (
     <div className="App">
