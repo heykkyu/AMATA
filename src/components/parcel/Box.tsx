@@ -77,14 +77,17 @@ const BlockShopImg = styled.img`
   object-fit: cover;
 `
 
-
 const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
   return (
     <>
       <ParcelListWrap>
         <Block>
-          <BlockCarrierImg
+          {/* <BlockCarrierImg
             src={require(`@src/assets/img/logo-${carrier?.name && logo_list.includes(carrier?.name) ? carrier?.name?.toLocaleLowerCase() : 'box'}.png`).default}
+            alt={carrier?.name}
+          /> */}
+          <BlockCarrierImg
+            src={require(`@src/assets/img/logo-box.png`).default}
             alt={carrier?.name}
           />
           <BlockParcelInfo>
@@ -92,8 +95,12 @@ const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
             <BlockParcelInfoText type="status">{delivery?.status}</BlockParcelInfoText>
           </BlockParcelInfo>
           {shop?.name && (
+            // <BlockShopImg
+            //   src={require(`@src/assets/img/logo-${logo_list.includes(shop.name.toLocaleLowerCase()) ? shop.name.toLocaleLowerCase() : 'box'}.png`).default}
+            //   alt={shop.name}
+            // />
             <BlockShopImg
-              src={require(`@src/assets/img/logo-${logo_list.includes(shop.name.toLocaleLowerCase()) ? shop.name.toLocaleLowerCase() : 'box'}.png`).default}
+              src={require(`@src/assets/img/logo-box.png`).default}
               alt={shop.name}
             />
           )}
