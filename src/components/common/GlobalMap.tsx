@@ -12,9 +12,15 @@ const GlobalMapWrap = styled.div`
   width: 100%;
   background-color: #fff;
   border-top: 1px solid #ddd;
+`
+
+const LinkWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  max-width: 700px;
+  margin: 0 auto;
+  height: inherit;
   svg {
     width: 1.5rem;
     height: auto;
@@ -26,7 +32,7 @@ const GlobalMapWrap = styled.div`
       cursor: pointer;
     }
     &:nth-child(2) {
-      margin: 0 30px;
+      margin: 0 40px;
     }
   }
 `
@@ -48,15 +54,17 @@ const GlobalNav = () => {
   return (
     <>
       <GlobalMapWrap>
-        <Link to="/">
-          <MdOutlineOtherHouses className={current === "list" ? "active" : ''}/>
-        </Link>
-        <Link to="/add">
-          <MdAddBox className={current === "add" ? "active" : ''}/>
-        </Link>
-        <Link to="/profile">
-          <MdPersonOutline className={current === "profile" ? "active" : ''}/>
-        </Link>
+        <LinkWrap>
+          <Link to="/">
+            <MdOutlineOtherHouses className={current === "list" ? "active" : ''}/>
+          </Link>
+          <Link to="/add">
+            <MdAddBox className={current === "add" ? "active" : ''}/>
+          </Link>
+          <Link to="/profile">
+            <MdPersonOutline className={current === "profile" ? "active" : ''}/>
+          </Link>
+        </LinkWrap>
       </GlobalMapWrap>
     </>
   );
