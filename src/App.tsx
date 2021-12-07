@@ -8,6 +8,7 @@ import ParcelList from "./views/ParcelList";
 import ParcelDetail from "./views/ParcelDetail";
 import ParcelAdd from "./views/ParcelAdd";
 import ParcelProfile from "./views/ParcelProfile";
+import LoggedInRoute from "./views/AuthInRoute";
 
 import { signIn } from '@src/state/auth/auth';
 
