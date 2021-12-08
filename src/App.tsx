@@ -7,6 +7,7 @@ import AuthLogin from "./components/auth/Login";
 import ParcelList from "./views/ParcelList";
 import ParcelDetail from "./views/ParcelDetail";
 import ParcelAdd from "./views/ParcelAdd";
+import ParcelEvent from "./views/ParcelEvent";
 import ParcelProfile from "./views/ParcelProfile";
 import LoggedInRoute from "./views/AuthInRoute";
 
@@ -33,6 +34,7 @@ function App() {
           <Route path='/' element={<ParcelList/>} />
           <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
           <Route path='/add' element={<ParcelAdd/>} />
+          <Route path='/event' element={<ParcelEvent/>} />
           <Route path='/profile' element={<ParcelProfile/>} />
         </Routes>
         <GlobalMap/>

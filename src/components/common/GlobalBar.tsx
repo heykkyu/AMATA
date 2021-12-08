@@ -65,6 +65,9 @@ const GlobalBar = () => {
       case "add":
         return "택배 ADD"
 
+      case "event":
+        return "EVENT"
+        
       case "profile":
         return "나의 PROFILE"
     

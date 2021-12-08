@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { MdOutlineOtherHouses, MdAddBox, MdPersonOutline } from "react-icons/md";
+import { MdOutlineOtherHouses, MdAddBox, MdCardGiftcard, MdPersonOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router';
 
@@ -46,6 +46,8 @@ const GlobalNav = () => {
       setCurrent("add")
     } else if (location.pathname.includes("profile")) {
       setCurrent("profile")
+    } else if (location.pathname.includes("event")) {
+      setCurrent("event")
     } else {
       setCurrent("list")
     }
@@ -60,6 +62,9 @@ const GlobalNav = () => {
           </Link>
           <Link to="/add">
             <MdAddBox className={current === "add" ? "active" : ''}/>
+          </Link>
+          <Link to="/event">
+            <MdCardGiftcard className={current === "event" ? "active" : ''}/>
           </Link>
           <Link to="/profile">
             <MdPersonOutline className={current === "profile" ? "active" : ''}/>
