@@ -2,6 +2,9 @@ import Lottie from 'react-lottie-player'
 import giftlottie from '../assets/lottie/gift.json'
 import styled from 'styled-components'
 import moment from "moment";
+import StarYellow from "@src/assets/img/star-yellow.png";
+import StarBlack from "@src/assets/img/star-black.png";
+import StarStamp from "@src/assets/img/star-stamp.png";
 
 const CalHead = styled.div`
   margin: 30px 0 10px;
@@ -27,23 +30,52 @@ const CalBody = styled.div`
   .calbody-row {
     display: flex;
     justify-content: center;
+    height: 70px;
     * {
     display: flex;
       justify-content: center;
       flex: 1 1 0;
     }
+    .calbody-row-date {
+      position: relative;
+      .calbody-row-date-num {
+        position: absolute;
+        display: block;
+        margin: 0;
+        left: 2px;
+        top: 0;
+        opacity: .8;
+        font-size: 11px;
+        width: 20px;
+      }
+    }
+  }
+  img {
+    width: 25px;
+    height: 25px;
+    flex: none !important;
+    &.stamp {
+      animation: fade 1s;
+    }
   }
 `
+const Guide = styled.div`
+  padding: 50px 0 100px;
+`
+
+const attendance = [
+  3, 7, 8, 10, 16
+]
 
 const ParcelEvent = () => {
-  const attendance = [{
-    day: 1,
-    point: 0,
-  },
-  {
-    day: 2,
-    point: 100,
-  }];
+  // const attendance = [{
+  //   day: 1,
+  //   point: 0,
+  // },
+  // {
+  //   day: 2,
+  //   point: 100,
+  // }];
 
   const setAttendance = () => {
     
@@ -72,23 +104,21 @@ const ParcelEvent = () => {
               let isOvered = current.format("MM") !== today.format("MM") ? "overed" : "";
 
               return (
-                <div className='test' key={i}>
-                  <p>{current.format("D")}</p>
-                  {isToday && !attendance?.find((x) => String(x.day) === String(current.format("D"))) ? (
+                <div className="calbody-row-date" key={i}>
+                  <p className="calbody-row-date-num">{current.format("D")}</p>
+                  {isToday && !attendance?.find((x) => String(x) === String(current.format("D"))) ? (
                     <div onClick={() => setAttendance()}>
-                      <h1>오늘</h1>
+                      <img src={StarStamp} className='stamp' alt="today"/>
                     </div>
                   ) : (
                     <>
                       {Number(current.format("D")) <= Number(todayD) &&
-                        (attendance?.find((x) => String(x.day) === String(current.format("D"))) ? (
+                        (attendance?.find((x) => String(x) === String(current.format("D"))) ? (
                           <>
-                            {attendance?.find((x) => String(x.day) === String(current.format("D")))?.point === 100 && <p>출첵</p>}
-                            {attendance?.find((x) => String(x.day) === String(current.format("D")))?.point === 500 && <p>출첵</p>}
-                            {attendance?.find((x) => String(x.day) === String(current.format("D")))?.point === 1000 && <p>출첵</p>}
+                            {attendance?.find((x) => String(x) === String(current.format("D")))&& <img src={StarYellow} alt="checked"/>}
                           </>
                         ) : (
-                          <h1>{todayD}</h1>
+                          <img src={StarBlack} alt="not-checked"/>
                         ))}
                     </>
                   )}
@@ -124,6 +154,9 @@ const ParcelEvent = () => {
           </CalHead>
           <CalBody>{generate()}</CalBody>
         </>
+        <Guide>
+          <p>행운의 선물은 다음달 7일에 문자메시지로 발송됩니다.</p>
+        </Guide>
       </div>
     </>
   );
