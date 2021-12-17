@@ -3,8 +3,36 @@ import giftlottie from '../assets/lottie/gift.json'
 import styled from 'styled-components'
 import moment from "moment";
 
-const ParcelEventWrap = styled.div`
+const CalHead = styled.div`
+  margin: 30px 0 10px;
+  * {
+    display: flex;
+    justify-content: center;
+    flex: 1 1 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .calhead-name {
+    color: #222;
+    &:nth-child(1) {
+      color: red;
+    }
+    &:nth-last-child(1) {
+      color: blue;
+    }
+  }
+`
 
+const CalBody = styled.div`
+  .calbody-row {
+    display: flex;
+    justify-content: center;
+    * {
+    display: flex;
+      justify-content: center;
+      flex: 1 1 0;
+    }
+  }
 `
 
 const ParcelEvent = () => {
@@ -31,7 +59,7 @@ const ParcelEvent = () => {
 
     for (let week = startWeek; week <= endWeek; week++) {
       calendar.push(
-        <div key={week}>
+        <div key={week} className="calbody-row">
           {Array(7)
             .fill(0)
             .map((n, i) => {
@@ -44,11 +72,11 @@ const ParcelEvent = () => {
               let isOvered = current.format("MM") !== today.format("MM") ? "overed" : "";
 
               return (
-                <div key={i}>
+                <div className='test' key={i}>
                   <p>{current.format("D")}</p>
                   {isToday && !attendance?.find((x) => String(x.day) === String(current.format("D"))) ? (
                     <div onClick={() => setAttendance()}>
-                      <h1>{todayD}</h1>
+                      <h1>오늘</h1>
                     </div>
                   ) : (
                     <>
@@ -75,7 +103,7 @@ const ParcelEvent = () => {
 
   return (
     <>
-      <ParcelEventWrap>
+      <div>
         <Lottie
           loop
           animationData={giftlottie}
@@ -84,19 +112,19 @@ const ParcelEvent = () => {
         />
         <strong>한달간 매일 출석시 행운의 선물을 드립니다.</strong>
 
-        <div>
-          <div>
+        <>
+          <CalHead>
             <div>
               {["일", "월", "화", "수", "목", "금", "토"].map((el) => (
-                <div key={el}>
+                <div key={el} className="calhead-name">
                   <p>{el}</p>
                 </div>
               ))}
             </div>
-          </div>
-          <div>{generate()}</div>
-        </div>
-      </ParcelEventWrap>
+          </CalHead>
+          <CalBody>{generate()}</CalBody>
+        </>
+      </div>
     </>
   );
 }
