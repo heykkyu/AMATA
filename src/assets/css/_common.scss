@@ -10,7 +10,7 @@
   margin: 0 auto;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 @keyframes appload-fadeout {
