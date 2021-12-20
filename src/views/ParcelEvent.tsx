@@ -1,3 +1,4 @@
+import { useState } from 'react'; 
 import Lottie from 'react-lottie-player'
 import giftlottie from '../assets/lottie/gift.json'
 import styled from 'styled-components'
@@ -56,16 +57,13 @@ const CalBody = styled.div`
     flex: none !important;
     &.stamp {
       animation: fade 1s;
+      cursor: pointer;
     }
   }
 `
 const Guide = styled.div`
   padding: 50px 0 100px;
 `
-
-const attendance = [
-  3, 7, 8, 10, 16
-]
 
 const ParcelEvent = () => {
   // const attendance = [{
@@ -76,9 +74,14 @@ const ParcelEvent = () => {
   //   day: 2,
   //   point: 100,
   // }];
+  const [attendance, setAttendance] = useState([3, 7, 8, 10, 16]);
 
-  const setAttendance = () => {
-    
+  const joinAttendance = () => {
+    const test =  moment(new Date()).format("D");
+    setAttendance(prev => 
+      [...prev, Number(test)]
+    );
+    alert("정상적으로 출석체크되셨습니다.")
   };
 
   const generate = () => {
@@ -105,9 +108,9 @@ const ParcelEvent = () => {
 
               return (
                 <div className="calbody-row-date" key={i}>
-                  <p className="calbody-row-date-num">{current.format("D")}</p>
+                  <div className="calbody-row-date-num">{current.format("D")}</div>
                   {isToday && !attendance?.find((x) => String(x) === String(current.format("D"))) ? (
-                    <div onClick={() => setAttendance()}>
+                    <div onClick={() => joinAttendance()} className="today">
                       <img src={StarStamp} className='stamp' alt="today"/>
                     </div>
                   ) : (
