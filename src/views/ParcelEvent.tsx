@@ -3,6 +3,7 @@ import Lottie from 'react-lottie-player'
 import giftlottie from '../assets/lottie/gift.json'
 import styled from 'styled-components'
 import moment from "moment";
+import 'moment/locale/ko';
 import StarYellow from "@src/assets/img/star-yellow.png";
 import StarBlack from "@src/assets/img/star-black.png";
 import StarStamp from "@src/assets/img/star-stamp.png";
@@ -74,18 +75,18 @@ const ParcelEvent = () => {
   //   day: 2,
   //   point: 100,
   // }];
-  const [attendance, setAttendance] = useState([3, 7, 8, 10, 16]);
+  const [attendance, setAttendance] = useState(['2021-12-03', '2021-12-07', '2021-12-08', '2021-12-10', '2021-12-16']);
 
   const joinAttendance = () => {
     const test =  moment(new Date()).format("D");
-    setAttendance(prev => 
-      [...prev, Number(test)]
-    );
+    // setAttendance(prev => 
+    //   [...prev, Number(test)]
+    // );
     alert("정상적으로 출석체크되셨습니다.")
   };
 
   const generate = () => {
-    const today = moment(new Date());
+    const today = moment();
     const startWeek = today.clone().startOf("month").week();
     const endWeek = today.clone().endOf("month").week() === 1 ? 53 : today.clone().endOf("month").week();
 
@@ -103,28 +104,34 @@ const ParcelEvent = () => {
                 .week(week)
                 .startOf("week")
                 .add(n + i, "day");
-              let isToday = today.format("YYYYMMDD") === current.format("YYYYMMDD") ? "today" : "";
+              let isToday = today.format("YYYYMMDD") === current.format("YYYYMMDD") ? true : false;
+              console.log("current.format", current.format("YYYYMMDD"))
               let isOvered = current.format("MM") !== today.format("MM") ? "overed" : "";
 
               return (
                 <div className="calbody-row-date" key={i}>
-                  <div className="calbody-row-date-num">{current.format("D")}</div>
-                  {isToday && !attendance?.find((x) => String(x) === String(current.format("D"))) ? (
-                    <div onClick={() => joinAttendance()} className="today">
-                      <img src={StarStamp} className='stamp' alt="today"/>
-                    </div>
-                  ) : (
-                    <>
-                      {Number(current.format("D")) <= Number(todayD) &&
-                        (attendance?.find((x) => String(x) === String(current.format("D"))) ? (
-                          <>
-                            {attendance?.find((x) => String(x) === String(current.format("D")))&& <img src={StarYellow} alt="checked"/>}
-                          </>
+                  {/* <div className="calbody-row-date-num">{current.format("YYYY-MM-DD")}</div> */}
+                  {!isOvered && 
+                     <>
+                        <div className="calbody-row-date-num">{current.format("D")}</div>
+                        {isToday && !attendance?.find((x) => String(moment(x).format("D")) === String(current.format("D"))) ? (
+                          <div onClick={() => joinAttendance()} className="today">
+                            <img src={StarStamp} className='stamp' alt="today"/>
+                          </div>
                         ) : (
-                          <img src={StarBlack} alt="not-checked"/>
-                        ))}
-                    </>
-                  )}
+                          <>
+                            {Number(current.format("D")) <= Number(todayD) &&
+                              (attendance?.find((x) => String(moment(x).format("D")) === String(current.format("D"))) ? (
+                                <>
+                                  {attendance?.find((x) => String(moment(x).format("D")) === String(current.format("D")))&& <img src={StarYellow} alt="checked"/>}
+                                </>
+                              ) : (
+                                <img src={StarBlack} alt="not-checked"/>
+                              ))}
+                          </>
+                        )}
+                   </>
+                  }
                 </div>
               );
             })}
@@ -147,6 +154,7 @@ const ParcelEvent = () => {
 
         <>
           <CalHead>
+            <>{moment().format("MM")}월</>
             <div>
               {["일", "월", "화", "수", "목", "금", "토"].map((el) => (
                 <div key={el} className="calhead-name">
