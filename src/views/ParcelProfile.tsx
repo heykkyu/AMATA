@@ -3,7 +3,7 @@ import profilelottie from '../assets/lottie/profile.json'
 import styled from 'styled-components'
 
 const ParcelListWrap = styled.div`
-
+  line-height: 25px;
 `
 
 const ParcelList = () => {

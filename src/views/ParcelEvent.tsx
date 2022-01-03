@@ -1,4 +1,4 @@
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import Lottie from 'react-lottie-player'
 import giftlottie from '../assets/lottie/gift.json'
 import styled from 'styled-components'
@@ -17,6 +17,9 @@ const CalHead = styled.div`
     font-size: 1rem;
     font-weight: bold;
   }
+  h1 {
+    font-size: 30px;
+  }
   .calhead-name {
     color: #222;
     &:nth-child(1) {
@@ -34,7 +37,7 @@ const CalBody = styled.div`
     justify-content: center;
     height: 70px;
     * {
-    display: flex;
+      display: flex;
       justify-content: center;
       flex: 1 1 0;
     }
@@ -57,33 +60,40 @@ const CalBody = styled.div`
     height: 25px;
     flex: none !important;
     &.stamp {
-      animation: fade 1s;
-      cursor: pointer;
+      animation: fadein 2s;
+      animation-iteration-count: infinite;
+      animation-fill-mode:forwards;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.3);
+      }
+    }
+    &.star-black {
+      opacity: .2;
     }
   }
 `
 const Guide = styled.div`
-  padding: 50px 0 100px;
+  padding: 50px 0 150px;
 `
 
 const ParcelEvent = () => {
-  // const attendance = [{
-  //   day: 1,
-  //   point: 0,
-  // },
-  // {
-  //   day: 2,
-  //   point: 100,
-  // }];
-  const [attendance, setAttendance] = useState(['2021-12-03', '2021-12-07', '2021-12-08', '2021-12-10', '2021-12-16']);
+  const [attendance, setAttendance] = useState<Array<string>>([]);
 
   const joinAttendance = () => {
-    const test =  moment(new Date()).format("D");
-    // setAttendance(prev => 
-    //   [...prev, Number(test)]
-    // );
+    setAttendance(prev => 
+      [...prev, String(`${moment(new Date()).format("YYYY")}-${moment(new Date()).format("MM")}-${moment(new Date()).format("DD")}`)]
+    );
     alert("정상적으로 출석체크되셨습니다.")
   };
+
+  useEffect(() => {
+    const now = moment(new Date());
+    const array = [1,3,4,5,6,10];
+    const array2 = array.map((x) => `${moment(now).format("YYYY")}-${moment(now).format("MM")}-${x*2 < 10 ? '0'+x*2 : x*2}`);
+
+    setAttendance(array2);
+  }, [])
 
   const generate = () => {
     const today = moment();
@@ -105,16 +115,14 @@ const ParcelEvent = () => {
                 .startOf("week")
                 .add(n + i, "day");
               let isToday = today.format("YYYYMMDD") === current.format("YYYYMMDD") ? true : false;
-              console.log("current.format", current.format("YYYYMMDD"))
               let isOvered = current.format("MM") !== today.format("MM") ? "overed" : "";
 
               return (
                 <div className="calbody-row-date" key={i}>
-                  {/* <div className="calbody-row-date-num">{current.format("YYYY-MM-DD")}</div> */}
                   {!isOvered && 
                      <>
                         <div className="calbody-row-date-num">{current.format("D")}</div>
-                        {isToday && !attendance?.find((x) => String(moment(x).format("D")) === String(current.format("D"))) ? (
+                        {isToday && !attendance?.find((x) => String(moment(x).format("D")) === todayD) ? (
                           <div onClick={() => joinAttendance()} className="today">
                             <img src={StarStamp} className='stamp' alt="today"/>
                           </div>
@@ -126,7 +134,7 @@ const ParcelEvent = () => {
                                   {attendance?.find((x) => String(moment(x).format("D")) === String(current.format("D")))&& <img src={StarYellow} alt="checked"/>}
                                 </>
                               ) : (
-                                <img src={StarBlack} alt="not-checked"/>
+                                <img src={StarBlack} className="star-black" alt="not-checked"/>
                               ))}
                           </>
                         )}
@@ -154,7 +162,7 @@ const ParcelEvent = () => {
 
         <>
           <CalHead>
-            <>{moment().format("MM")}월</>
+            <h1>{moment().format("MM")}월</h1>
             <div>
               {["일", "월", "화", "수", "목", "금", "토"].map((el) => (
                 <div key={el} className="calhead-name">
