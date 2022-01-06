@@ -9,7 +9,9 @@ import ParcelDetail from "./views/ParcelDetail";
 import ParcelAdd from "./views/ParcelAdd";
 import ParcelEvent from "./views/ParcelEvent";
 import ParcelProfile from "./views/ParcelProfile";
-import LoggedInRoute from "./views/AuthInRoute";
+// import LoggedInRoute from "./views/AuthInRoute";
+
+import UserType from "@src/types/user.type";
 
 import { signIn } from '@src/state/auth/auth';
 
@@ -17,7 +19,8 @@ import './App.css';
 import "@src/assets/css/_common.scss";
 
 
-function App() {
+const App = () => {
+  const [currentUser, setCurrentUser] = useState<UserType | undefined>(undefined);
   const [user, setUser] = useState(null);
   const authenticated = user != null;
 

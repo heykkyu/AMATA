@@ -15,7 +15,8 @@ const AuthInRoute = ({
     <Route>
       d
     </Route>
-    {/* <Component/> */}
+    <Component/>
+    {otherProps}
   </Routes>
 );
 export default AuthInRoute;
