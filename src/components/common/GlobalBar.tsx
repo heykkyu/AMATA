@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import { MdKeyboardBackspace } from "react-icons/md";
+import * as AuthService from "@src/services/auth.service";
 import styled from 'styled-components'
 
 const GlobalBarWrap = styled.div`
@@ -25,10 +26,21 @@ const LogoBar = styled.div`
 const LogoBack = styled.div`
   font-size: 25px;
 `
+
+const Title = styled.div`
+  display: flex;
+  > a {
+    margin-left: 10px;
+    display: flex;
+  }
+`
 const LogoTitle = styled.span`
   font-family: 'Anton', sans-serif;
   font-size: 18px;
   margin: 0;
+  position: relative;
+`
+const LoginTitle = styled.span`
   position: relative;
 `
 
@@ -44,10 +56,10 @@ const GlobalBar = () => {
   const navigate = useNavigate();
   const [current, setCurrent] = useState("");
   const [backBtn, handleBackBtn] = useState(false);
-
+  const user = AuthService.getCurrentUser();
+  
   useEffect(() => {
     console.log("locaiton", location)
-
     setCurrent(mapCurrent(location.pathname.split("/")[1]))
     if (location.pathname.split("/")[2]) {
       handleBackBtn(true)
@@ -90,10 +102,18 @@ const GlobalBar = () => {
               <MdKeyboardBackspace/>
             )}
           </LogoBack>
-          <Link to="/">
-            <LogoTitle>BROWN BOX</LogoTitle>
-          </Link>
+          <Title>
+            <Link to="/">
+              <LogoTitle>BROWN BOX</LogoTitle>
+            </Link>
+            {!user && (
+              <Link to="/login">
+                <LoginTitle>Login</LoginTitle>
+              </Link>
+            ) }
           {/* <Hamburger/> */}
+          </Title>
+
         </LogoBar>
 
         {/* logged in */}

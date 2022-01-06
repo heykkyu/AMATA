@@ -7,16 +7,10 @@ interface IProps {
   component: React.ComponentType<any>;
 }
 
-const AuthInRoute = ({
-  component: Component,
-  ...otherProps
-}: IProps) => (
-  <Routes>
-    <Route>
-      d
-    </Route>
-    <Component/>
-    {otherProps}
-  </Routes>
+const AuthInRoute = ({ exact = false, path, component }: IProps) => (
+  <>
+    {/* <Route exact={exact} path={path} component={component}>
+    </Route> */}
+  </>
 );
 export default AuthInRoute;

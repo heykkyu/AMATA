@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppLoad from "./views/AppLoad";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
@@ -11,6 +11,7 @@ import ParcelEvent from "./views/ParcelEvent";
 import ParcelProfile from "./views/ParcelProfile";
 // import LoggedInRoute from "./views/AuthInRoute";
 
+import * as AuthService from "@src/services/auth.service";
 import UserType from "@src/types/user.type";
 
 import { signIn } from '@src/state/auth/auth';
@@ -22,10 +23,21 @@ import "@src/assets/css/_common.scss";
 const App = () => {
   const [currentUser, setCurrentUser] = useState<UserType | undefined>(undefined);
   const [user, setUser] = useState(null);
-  const authenticated = user != null;
+  // const authenticated = user != null;
 
   // const login = ({ email, password }) => setUser(signIn({ email, password }));
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+
+
+  }, [])
+
   const logout = () => setUser(null);
+
 
   return (
     <div className="App">
@@ -33,14 +45,21 @@ const App = () => {
         <GlobalBar/>
         <AppLoad/>
         <Routes>
-          <Route path='/login' element={<AuthLogin/>} />
-          <Route path='/' element={<ParcelList/>} />
-          <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
-          <Route path='/add' element={<ParcelAdd/>} />
-          <Route path='/event' element={<ParcelEvent/>} />
-          <Route path='/profile' element={<ParcelProfile/>} />
+          {!currentUser ? (
+            <Route path='/login' element={<AuthLogin/>} />
+          ) : (
+            <>
+              <Route path='/' element={<ParcelList/>} />
+              <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
+              <Route path='/add' element={<ParcelAdd/>} />
+              <Route path='/event' element={<ParcelEvent/>} />
+              <Route path='/profile' element={<ParcelProfile/>} />
+            </>
+          )}
         </Routes>
-        <GlobalMap/>
+        {currentUser && (
+          <GlobalMap/>
+        )}
       </Router>
     </div>
   );
