@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { MdKeyboardBackspace } from "react-icons/md";
 import * as AuthService from "@src/services/auth.service";
 import styled from 'styled-components'
+import { logout } from "@src/services/auth.service";
 
 const GlobalBarWrap = styled.div`
   text-align: left;
@@ -31,7 +32,14 @@ const Title = styled.div`
   display: flex;
   > a {
     margin-left: 10px;
-    display: flex;
+    display: table;
+    span {
+      display:table-cell;
+      vertical-align:middle;
+    }
+    &:hover {
+      opacity: .5;
+    }
   }
 `
 const LogoTitle = styled.span`
@@ -83,6 +91,9 @@ const GlobalBar = () => {
       case "profile":
         return "나의 PROFILE"
     
+      case "login":
+        return "Login"
+        
       default:
         return "택배 LIST"
     }
@@ -106,10 +117,14 @@ const GlobalBar = () => {
             <Link to="/">
               <LogoTitle>BROWN BOX</LogoTitle>
             </Link>
-            {!user && (
+            {!user ? (
               <Link to="/login">
-                <LoginTitle>Login</LoginTitle>
+                <LoginTitle>Log In</LoginTitle>
               </Link>
+            ) : (
+              <a onClick={() => logout()}>
+                <LoginTitle>Log Out</LoginTitle>
+              </a>
             ) }
           {/* <Hamburger/> */}
           </Title>

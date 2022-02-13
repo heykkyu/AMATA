@@ -22,10 +22,7 @@ import "@src/assets/css/_common.scss";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState<UserType | undefined>(undefined);
-  const [user, setUser] = useState(null);
-  // const authenticated = user != null;
-
-  // const login = ({ email, password }) => setUser(signIn({ email, password }));
+ 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
 
@@ -35,9 +32,6 @@ const App = () => {
 
 
   }, [])
-
-  const logout = () => setUser(null);
-
 
   return (
     <div className="App">
