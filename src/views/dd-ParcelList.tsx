@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Box from "@src/components/parcel/Box"
+import ParcelBox from "@src/components/parcel/ParcelBox"
 import Map from "@src/components/parcel/Map"
 import { Link } from "react-router-dom";
 import { parcle_list }from "@src/assets/data/DummyList"
@@ -22,7 +22,7 @@ const ParcelList = () => {
               key={data.carrier.tracking_no}
               onClick={() => navigate(`/detail/${data.carrier.tracking_no}`)}
             >
-              <Box 
+              <ParcelBox 
                 carrier={data.carrier}
                 shop={data.shop}
                 product={data.product}
@@ -47,4 +47,3 @@ const ParcelList = () => {
 }
 
 export default ParcelList;
- 
