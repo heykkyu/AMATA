@@ -76,11 +76,30 @@ const AuthLogin = () => {
     <>
       <AuthLoginWrap>
         <div className="loginbox">
-          {/* <p>Email account</p> */}
-          <TextField id="outlined-basic" label="Email" variant="outlined" name="email" value={form.email} onChange={handleInput}/>
-          {/* <p>Passwords</p> */}
-          <TextField id="outlined-basic" label="Password" variant="outlined" name="password" type="password" value={form.password} onChange={handleInput}/>
-          <Button onClick={() => handleLogin()} variant="contained" color="primary">Login</Button>
+          <TextField 
+            id="outlined-basic" 
+            label="Email" 
+            variant="outlined" 
+            name="email" 
+            value={form.email} 
+            onChange={handleInput} 
+            placeholder="Type Any Text"
+          />
+          <TextField 
+            id="outlined-basic" 
+            label="Password" 
+            variant="outlined" 
+            name="password" 
+            type="password" 
+            value={form.password} 
+            onChange={handleInput}
+            placeholder="Type Any Text"
+          />
+          <Button 
+            onClick={() => handleLogin()} 
+            variant="contained" 
+            color="primary"
+          >Login</Button>
           <p className="loginguide">
             <span className="loginguide-logo">BrownBox</span>를 사용하면 <span className="loginguide-privacy">개인정보처리방침</span>에 동의하는 것으로 간주됩니다.</p>
         </div>

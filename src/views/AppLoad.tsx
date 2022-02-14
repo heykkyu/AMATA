@@ -8,7 +8,7 @@ const AppLoadDiv = styled.div`
   height: 100%;
   left: 0;
   top: 0;
-  position: fixed;
+  /* position: fixed; */
   z-index: 1;
   text-align: center;
   background-color: white;
@@ -30,11 +30,11 @@ const AppLoadText = styled.div`
 
 const AppLoad = () => {
   const [show, setShow] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setShow(false)
-    }, (5000));
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShow(false)
+  //   }, (5000));
+  // }, [])
 
   return (
     <>

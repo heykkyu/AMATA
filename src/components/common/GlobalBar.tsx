@@ -50,6 +50,8 @@ const LogoTitle = styled.span`
 `
 const LoginTitle = styled.span`
   position: relative;
+  font-weight: bold;
+  text-transform: uppercase; 
 `
 
 

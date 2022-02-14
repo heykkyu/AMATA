@@ -26,7 +26,6 @@ const App = () => {
  
   useEffect(() => {
     const user = AuthService.getCurrentUser();
-
     if (user) {
       setCurrentUser(user);
     }
@@ -38,10 +37,12 @@ const App = () => {
     <div className="App">
       <Router>
         <GlobalBar/>
-        <AppLoad/>
         <Routes>
           {!currentUser ? (
-            <Route path='/login' element={<AuthLogin/>} />
+            <>
+              <Route path='/login' element={<AuthLogin/>} />
+              <Route path='*' element={<AppLoad/>} />
+            </>
           ) : (
             <>
               <Route path='/' element={<ParcelList/>} />
