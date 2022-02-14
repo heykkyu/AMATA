@@ -66,7 +66,8 @@ const AuthLogin = () => {
   const handleLogin = () => {
     login(form.email, form.password).then(
       () => {
-        navigate("/")
+        navigate("/");
+        window.location.reload();
       }
     )
   }

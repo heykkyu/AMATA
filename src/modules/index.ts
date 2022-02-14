@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import trackingsReducer from './trackings';
+import trackings from './trackings';
 
 const rootReducer = combineReducers({
-  trackingsReducer
+  trackings
 })
 
 export default rootReducer;

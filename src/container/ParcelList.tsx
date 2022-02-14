@@ -4,8 +4,10 @@ import Map from "@src/components/parcel/Map"
 import { Link } from "react-router-dom";
 import { parcle_list }from "@src/assets/data/DummyList"
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const ParcelList = () => {
+  const parcelList = useSelector
   const navigate = useNavigate();
 
   return (
