@@ -30,12 +30,24 @@ const ParcelList = () => {
 
   const [tracking, setTracking] = useState<string>("");
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setTracking(e.target.value);
+    const regex = e.target.value.replace(/[^0-9]/g, "")
+    setTracking(String(regex));
   }
 
   const addNewParcel = () => {
-    dispatch(addTracking(tracking));
-    navigate(`/detail/${tracking}`)
+    if (!tracking || tracking.length < 8) {
+      alert('Unvalide Tracking')
+    } else {
+      dispatch(addTracking(tracking));
+      navigate(`/detail/${tracking}`)
+    }
+  }
+
+  const addNewEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addNewParcel();
+      e.preventDefault();
+    }
   }
   
   return (
@@ -54,6 +66,8 @@ const ParcelList = () => {
             id="outlined-basic" 
             label="Tracking No" 
             variant="outlined"
+            value={tracking}
+            onKeyPress={addNewEnter}
           />
         </form>
         <Button
