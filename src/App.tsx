@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
-import AppLoad from "./views/AppLoad";
+import AppLoad from "./components/common/AppLoad";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
 import AuthLogin from "./components/auth/Login";
 // import ParcelList from "./views/ParcelList";
 import ParcelList from "./container/ParcelList";
-import ParcelDetail from "./views/ParcelDetail";
+import ParcelDetail from "./container/ParcelDetail";
 import ParcelAdd from "./container/ParcelAdd";
-import ParcelEvent from "./views/ParcelEvent";
-import ParcelProfile from "./views/ParcelProfile";
+import ParcelEvent from "./container/ParcelEvent";
+import ParcelProfile from "./container/ParcelProfile";
 // import LoggedInRoute from "./views/AuthInRoute";
 
 import * as AuthService from "@src/services/auth.service";
-import UserType from "@src/types/user.type";
 
 // import { signIn } from '@src/state/auth/auth';
-
-import './App.css';
 import "@src/assets/css/_common.scss";
 
+ interface UserType {
+  email: string,
+  username: string,
+  password: string,
+}
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState<UserType | undefined>(undefined);

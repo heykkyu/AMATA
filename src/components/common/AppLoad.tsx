@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import styled from 'styled-components'
 import Lottie from 'react-lottie-player'
-import apploadlottie from '../assets/lottie/app-load.json'
+import apploadlottie from '@src/assets/lottie/app-load.json'
 
 const AppLoadDiv = styled.div`
   width: 100%;
