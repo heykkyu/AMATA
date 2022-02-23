@@ -48,8 +48,17 @@ const AppLoad = () => {
             play
           />
           <AppLoadText>
-            <p>내 택배는 어디에?</p>
-            <strong>브라운 박스</strong>
+            {localStorage.getItem("lang") === "ko" ?
+            <>
+              <p>내 택배는 어디에?</p>
+              <strong>브라운 박스</strong>
+            </>
+            :
+            <>
+              <p>Where is my parcel?</p>
+              <strong>BROWN BOX</strong>
+            </>
+            }
           </AppLoadText>
         </AppLoadDivCenter>
       </AppLoadDiv>

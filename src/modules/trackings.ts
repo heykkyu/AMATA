@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // 액션 타입 선언
 const ADD_TRACKING = 'parcel/ADD_TRACKING' as const;
 const REMOVE_TRACKING = 'parcel/REMOVE_TRACKING' as const;
@@ -24,6 +26,8 @@ export type Trackings = {
   status: number;
 };
 
+export type TrackingList = [];
+
 export type TrackingState = Trackings[];
 
 // 초기상태
@@ -37,6 +41,7 @@ function trackings(
   switch (action.type) {
     case ADD_TRACKING:
       console.log(action.payload)
+      putNewParcel();
       return state;
   
     case REMOVE_TRACKING:
@@ -46,5 +51,26 @@ function trackings(
       return state;
   }
 }
+
+const getParceList = async() => {
+  const TrackingList = await axios.get('https://jsonplaceholder.typicode.com/posts')
+  console.log("TrackingList", TrackingList);
+  return {
+    TrackingList
+  }
+}
+
+const putNewParcel = async() => {
+  const TrackingsDummy = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
+  const Trackings = {
+    tracking: '12314124124',
+    status: 0
+  }
+  console.log("🔹putNewParcel", Trackings);
+  return {
+    Trackings
+  }
+}
+
 
 export default trackings;

@@ -28,6 +28,12 @@ const App = () => {
  
   useEffect(() => {
     const user = AuthService.getCurrentUser();
+    const userLanguage = navigator.language;
+    if (userLanguage && userLanguage.includes("ko-")) {
+      localStorage.setItem("lang", "ko");
+    } else {
+      localStorage.setItem("lang", userLanguage);
+    }
     if (user) {
       setCurrentUser(user);
     }
