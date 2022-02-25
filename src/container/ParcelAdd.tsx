@@ -28,18 +28,28 @@ const ParcelList = () => {
   const navigate = useNavigate();
   // const onAdd = useCallback(() => dispatch(addTracking()), [dispatch]);
 
-  const [tracking, setTracking] = useState<string>("");
+  interface trackingType {
+    carrier: string,
+    tracking_no: string
+  }
+  const [trackingInfo, setTrackingInfo] = useState<trackingType>({
+    carrier: "",
+    tracking_no: "" 
+  });
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value.replace(/[^0-9]/g, "")
-    setTracking(String(regex));
+    setTrackingInfo(prev => ({
+      ...prev,
+      tracking_no: String(regex)
+    }))
   }
 
   const addNewParcel = () => {
-    if (!tracking || tracking.length < 8) {
+    if (!trackingInfo.tracking_no || trackingInfo.tracking_no.length < 8) {
       alert('Unvalide Tracking')
     } else {
-      dispatch(addTracking('한진', tracking));
-      navigate(`/detail/${tracking}`)
+      dispatch(addTracking(trackingInfo.carrier, trackingInfo.tracking_no));
+      navigate(`/detail/${trackingInfo.tracking_no}`)
     }
   }
 
@@ -61,12 +71,20 @@ const ParcelList = () => {
           play
         />
         <form className={classes.root} noValidate autoComplete="off">
+        <TextField 
+            onChange={handleChange}
+            id="outlined-basic" 
+            label="Carrier" 
+            variant="outlined"
+            value={trackingInfo.carrier}
+            onKeyPress={addNewEnter}
+          />
           <TextField 
             onChange={handleChange}
             id="outlined-basic" 
             label="Tracking No" 
             variant="outlined"
-            value={tracking}
+            value={trackingInfo.tracking_no}
             onKeyPress={addNewEnter}
           />
         </form>
