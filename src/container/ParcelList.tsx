@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import ParcelBox from "@src/components/parcel/ParcelBox"
 import Map from "@src/components/parcel/Map"
 import { Link } from "react-router-dom";
@@ -7,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { loadTrackingList } from '@src/modules/trackinglist';
 import { RootState } from '../modules';
-import { MdDataSaverOn } from 'react-icons/md';
 
 const ParcelList = () => {
   const dispatch = useDispatch();
