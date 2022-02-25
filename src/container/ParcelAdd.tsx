@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components'
 import { useNavigate } from 'react-router';
-import { addTracking } from '@src/modules/trackings'
+import { addTracking } from '@src/modules/trackingone'
   
   const useStyles = makeStyles((theme) => ({
     root: {

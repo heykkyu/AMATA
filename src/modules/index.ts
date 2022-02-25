@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import trackings from './trackings';
+import trackingone from './trackingone';
+import trackinglist from './trackinglist';
 
 const rootReducer = combineReducers({
-  trackings
+  trackingone,
+  trackinglist
 })
 
 export default rootReducer;

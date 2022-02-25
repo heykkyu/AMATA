@@ -26,15 +26,13 @@ export type Trackings = {
   status: number;
 };
 
-export type TrackingList = [];
-
 export type TrackingState = Trackings[];
 
 // 초기상태
 const initialState: TrackingState = [];
 
 // 리듀서
-function trackings(
+function trackingone(
   state: TrackingState = initialState,
   action: TrackingAction
 ): TrackingState {
@@ -52,14 +50,6 @@ function trackings(
   }
 }
 
-const getParceList = async() => {
-  const TrackingList = await axios.get('https://jsonplaceholder.typicode.com/posts')
-  console.log("TrackingList", TrackingList);
-  return {
-    TrackingList
-  }
-}
-
 const putNewParcel = async() => {
   const TrackingsDummy = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
   const Trackings = {
@@ -73,4 +63,4 @@ const putNewParcel = async() => {
 }
 
 
-export default trackings;
+export default trackingone;
