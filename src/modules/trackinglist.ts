@@ -42,15 +42,15 @@ export default function trackinglist(state: ListState = initialState, action: Li
       if (list && list.length > 0) {
         return JSON.parse(list);
       } else {
-        const result = getParcelList();
-        // AxiosResponse<> 적용
-        return parcle_list;
+        let result:ListState = [];
+        getParcelList().then(res => result = res);
+        return result;
       }
 
     case ADD_TRACKING: 
       const newObj = {
         carrier: {
-          name: action.payload.carrier,
+          name: action.payload.carrier || "테스트",
           tracking_no: action.payload.tracking_no
         },
         shop: {},
@@ -59,23 +59,25 @@ export default function trackinglist(state: ListState = initialState, action: Li
           status: "3"
         }
       }
-      const newState = [...state.concat(newObj)]
+
+      const newState = [...state];
+      newState.unshift(newObj);
       localStorage.setItem("parcel_list", JSON.stringify(newState))
+      console.log("parcel_list", localStorage.getItem("parcel_list"))
       return newState;
     default:
       return state;
   }
 }
 
-const getParcelList = async() => {
-  await axios.get<any[]>('https://jsonplaceholder.typicode.com/posts/1')
-    .then((res) => {
-      localStorage.setItem("parcel_list", JSON.stringify(parcle_list))
-      return res.data;
-    })
-    .catch((err) => {
-      alert(err);
-      return;
-    })
-}
 
+const getParcelList = async () => {
+  try {
+    const res = await axios.get<any[]>('https://jsonplaceholder.typicode.com/posts/1');
+    localStorage.setItem("parcel_list", JSON.stringify(parcle_list))
+    return res.data;
+  } catch (e) {
+    alert(e)
+    return [];
+  }
+}

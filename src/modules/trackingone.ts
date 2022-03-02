@@ -39,7 +39,6 @@ function trackingone(
   switch (action.type) {
     case ADD_TRACKING:
       console.log(action.payload)
-      putNewParcel();
       return state;
   
     case REMOVE_TRACKING:
@@ -50,17 +49,6 @@ function trackingone(
   }
 }
 
-const putNewParcel = async() => {
-  const TrackingsDummy = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
-  const Trackings = {
-    tracking: '12314124124',
-    status: 0
-  }
-  console.log("🔹putNewParcel", Trackings);
-  return {
-    Trackings
-  }
-}
 
 
 export default trackingone;

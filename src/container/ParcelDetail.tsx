@@ -4,9 +4,7 @@ import Map from "@src/components/parcel/Map"
 import { parcle_list }from "@src/assets/data/DummyList"
 import { useParams } from 'react-router'
 
-const ParcelDetailWrap = styled.div`
-
-`
+const ParcelDetailWrap = styled.div``
 
 const ParcelDetail = () => {
   let { tracking_no } = useParams();
@@ -38,7 +36,6 @@ const ParcelDetail = () => {
             )
           )
         })}
-
       </ParcelDetailWrap>
     </>
   );
