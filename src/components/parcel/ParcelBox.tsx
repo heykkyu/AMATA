@@ -90,7 +90,7 @@ const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
             alt={carrier?.name}
           />
           <BlockParcelInfo>
-            <BlockParcelInfoText type="name">{product?.name}</BlockParcelInfoText>
+            <BlockParcelInfoText type="name">{product?.name || '택배'}</BlockParcelInfoText>
             <BlockParcelInfoText type="status">{delivery?.status}</BlockParcelInfoText>
           </BlockParcelInfo>
           {shop?.name && (

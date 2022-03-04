@@ -28,7 +28,8 @@ export type List = {
   shop: {},
   product: {},
   delivery: {
-    status: string
+    status: string,
+    logs: string[]
   }
 };
 type ListState = List[];
@@ -56,7 +57,8 @@ export default function trackinglist(state: ListState = initialState, action: Li
         shop: {},
         product: {},
         delivery: {
-          status: "3"
+          status: "배송 접수 전",
+          logs: []
         }
       }
 

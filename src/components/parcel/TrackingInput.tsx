@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     fontWeight: 'bold',
     width: '27.5ch',
-    padding: '20px 0',
+    padding: '15px 0',
   },
 }));
 

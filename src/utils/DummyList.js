@@ -62,20 +62,13 @@ export const parcle_list = [
       currency: "kor",
     },
     delivery: {
-      status: "배송완료",
+      status: "배송중",
       logs: [
-        {
-          status: "배송완료",
-          location: {
-            lat: 37.51304564506471,
-            lng: 127.10292945077458,
-          }
-        },
         {
           status: "배송중",
           location: {
-            lat: 37.51304564506471,
-            lng: 127.10292945077458,
+            lat: 37.46126534230149,
+            lng: 126.44642036392389,
           }
         },
         {

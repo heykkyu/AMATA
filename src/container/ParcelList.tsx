@@ -22,6 +22,7 @@ const ParcelList = () => {
         {parcelList?.map((data) => {
           return (
             <div key={data.carrier?.tracking_no}>
+            
               <div 
                 key={data.carrier.tracking_no}
                 onClick={() => navigate(`/detail/${data.carrier.tracking_no}`)}
@@ -33,7 +34,7 @@ const ParcelList = () => {
                   delivery={data.delivery}
                 />
                 {
-                  data.delivery.status !== "배송완료" && (
+                  data.delivery.logs?.length > 0 && data.delivery.status !== '배송완료'  && (
                     <Map 
                       from="list"
                       carrier={data.carrier}

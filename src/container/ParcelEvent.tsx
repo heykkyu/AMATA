@@ -74,7 +74,7 @@ const CalBody = styled.div`
   }
 `
 const Guide = styled.div`
-  padding: 50px 0 150px;
+  padding: 50px 0;
 `
 
 const ParcelEvent = () => {

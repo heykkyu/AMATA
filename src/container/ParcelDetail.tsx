@@ -12,7 +12,6 @@ const ParcelDetail = () => {
   return (
     <>
       <ParcelDetailWrap>
-        {tracking_no}
         {parcle_list.map((data, i) => {
           return (
             i < 1 && (
