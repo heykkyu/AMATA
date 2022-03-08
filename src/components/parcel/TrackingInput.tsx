@@ -14,12 +14,15 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-      display: 'block'
-    },
-    marginBottom: '20px',
+    // '& > *': {
+    //   margin: theme.spacing(1),
+    //   width: '25ch',
+    //   display: 'block'
+    // },
+    // marginBottom: '20px',
+    // select: {
+    //   textAlign: 'left',
+    // }
   },
   button: {
     fontWeight: 'bold',
@@ -59,8 +62,10 @@ const TrackingInput = () => {
   }
 
   const addNewParcel = () => {
-    if (!trackingInfo.tracking_no || trackingInfo.tracking_no.length < 8) {
-      alert('Unvalide Tracking')
+    if (!trackingInfo.carrier) {
+      alert("You missed to choose carrier.");
+    } else if (!trackingInfo.tracking_no || trackingInfo.tracking_no.length < 8) {
+      alert("Oops! It's unvalide tracking number.")
     } else {
       dispatch(addTracking(trackingInfo.carrier, trackingInfo.tracking_no));
       navigate(`/detail/${trackingInfo.tracking_no}`)
@@ -108,7 +113,6 @@ const TrackingInput = () => {
             value={trackingInfo.tracking_no}
             onKeyPress={addNewEnter}
           />
-
         </form>
           <Button
             variant="contained" 

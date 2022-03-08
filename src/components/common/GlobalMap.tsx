@@ -12,6 +12,7 @@ const GlobalMapWrap = styled.div`
   width: 100%;
   background-color: #fff;
   border-top: 1px solid #ddd;
+  z-index: 1000;
 `
 
 const LinkWrap = styled.div`

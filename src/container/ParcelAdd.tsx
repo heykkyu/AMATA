@@ -11,7 +11,7 @@ const ParcelList = () => {
       <Lottie
         loop
         animationData={meditationlottie}
-        style={{ height: 300 }}
+        style={{ height: 200 }}
         play
       />
       
