@@ -14,7 +14,6 @@ const ParcelList = () => {
         style={{ height: 200 }}
         play
       />
-      
       <TrackingInput
       />
     </>
