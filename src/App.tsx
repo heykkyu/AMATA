@@ -11,8 +11,11 @@ import ParcelAdd from "./container/ParcelAdd";
 import ParcelEvent from "./container/ParcelEvent";
 import ParcelProfile from "./container/ParcelProfile";
 // import LoggedInRoute from "./views/AuthInRoute";
-
 import * as AuthService from "@src/services/auth.service";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./modules";
+import Thunk from "redux-thunk";
 
 // import { signIn } from '@src/state/auth/auth';
 import "@src/assets/css/_common.scss";
@@ -41,31 +44,36 @@ const App = () => {
 
   }, [])
 
+
+  const store = createStore(rootReducer, applyMiddleware(Thunk))
   return (
-    <div className="App">
-      <Router>
-        <GlobalBar/>
-        <Routes>
-          {!currentUser ? (
-            <>
-              <Route path='/login' element={<AuthLogin/>} />
-              <Route path='*' element={<AppLoad/>} />
-            </>
-          ) : (
-            <>
-              <Route path='/' element={<ParcelList/>} />
-              <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
-              <Route path='/add' element={<ParcelAdd/>} />
-              <Route path='/event' element={<ParcelEvent/>} />
-              <Route path='/profile' element={<ParcelProfile/>} />
-            </>
+    <Provider store={store}>
+      <div className="App">
+
+        <Router>
+          <GlobalBar/>
+          <Routes>
+            {!currentUser ? (
+              <>
+                <Route path='/login' element={<AuthLogin/>} />
+                <Route path='*' element={<AppLoad/>} />
+              </>
+            ) : (
+              <>
+                <Route path='/' element={<ParcelList/>} />
+                <Route path='/detail/:tracking_no' element={<ParcelDetail/>} />
+                <Route path='/add' element={<ParcelAdd/>} />
+                <Route path='/event' element={<ParcelEvent/>} />
+                <Route path='/profile' element={<ParcelProfile/>} />
+              </>
+            )}
+          </Routes>
+          {currentUser && (
+            <GlobalMap/>
           )}
-        </Routes>
-        {currentUser && (
-          <GlobalMap/>
-        )}
-      </Router>
-    </div>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 
