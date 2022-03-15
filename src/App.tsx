@@ -41,7 +41,6 @@ const App = () => {
       setCurrentUser(user);
     }
 
-
   }, [])
 
 
@@ -49,7 +48,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className="App">
-
         <Router>
           <GlobalBar/>
           <Routes>
