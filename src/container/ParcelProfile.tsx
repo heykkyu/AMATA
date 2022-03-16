@@ -4,6 +4,9 @@ import styled from 'styled-components'
 
 const ParcelListWrap = styled.div`
   line-height: 25px;
+  background-color: white;
+  margin-top: 15px;
+  padding-bottom: 50px;
 `
 
 const ParcelList = () => {

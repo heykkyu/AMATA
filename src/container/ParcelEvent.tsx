@@ -6,7 +6,6 @@ import moment from "moment";
 import 'moment/locale/ko';
 import StarYellow from "@src/assets/img/star-yellow.png";
 import StarBlack from "@src/assets/img/star-black.png";
-import StarStamp from "@src/assets/img/star-stamp.png";
 
 const CalHead = styled.div`
   margin: 30px 0 10px;
@@ -43,34 +42,36 @@ const CalBody = styled.div`
     }
     .calbody-row-date {
       position: relative;
-      .calbody-row-date-num {
+      > p, img {
         position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .calbody-row-date-num {
         display: block;
+        z-index: 1;
         margin: 0;
-        left: 2px;
-        top: 0;
         opacity: .8;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: bold;
-        width: 20px;
       }
     }
   }
   img {
-    width: 25px;
-    height: 25px;
-    flex: none !important;
+    width: 35px;
+    height: 35px;
     &.stamp {
+      opacity: 0.5;
       animation: fadein 2s;
       animation-iteration-count: infinite;
       animation-fill-mode:forwards;
       &:hover {
         cursor: pointer;
-        transform: scale(1.3);
       }
     }
     &.star-black {
-      opacity: .2;
+      opacity: .2
     }
   }
 `
@@ -122,10 +123,10 @@ const ParcelEvent = () => {
                 <div className="calbody-row-date" key={i}>
                   {!isOvered && 
                      <>
-                        <div className="calbody-row-date-num">{current.format("D")}</div>
+                        <p className="calbody-row-date-num">{current.format("D")}</p>
                         {isToday && !attendance?.find((x) => String(moment(x).format("D")) === todayD) ? (
                           <div onClick={() => joinAttendance()} className="today">
-                            <img src={StarStamp} className='stamp' alt="today"/>
+                            <img src={StarYellow} className='stamp' alt="today"/>
                           </div>
                         ) : (
                           <>
@@ -152,7 +153,7 @@ const ParcelEvent = () => {
 
   return (
     <>
-      <div>
+      <div style={{background: "white", marginTop: "15px"}}>
         <Lottie
           loop
           animationData={giftlottie}
