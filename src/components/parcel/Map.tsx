@@ -1,13 +1,33 @@
 import { useEffect } from 'react';
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import MapMarker from "@src/assets/img/map-marker-purple.png";
 
 const ParcelMapWrap = styled.div<Props>`
+  ${props =>
+    props.from && props.from === 'list' &&
+    css`
+      margin-top: -10px;
+      width: calc(100% - 20px);
+      margin-left: 10px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        background-color: white;
+        height: 20px;
+        width: 100%;
+        left: 0;
+        z-index: 0;
+      }
+    `}
+  };
   .kakao-map {
     width: 100%;
     height: 200px;
     margin-bottom: 20px;
   }
+
 `
 
 interface Props {

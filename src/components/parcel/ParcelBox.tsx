@@ -11,6 +11,8 @@ const Block = styled.div`
   padding: 10px 15px;
   min-height: 60px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
   &:hover {
     cursor: pointer;
     opacity: .7;

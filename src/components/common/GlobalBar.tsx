@@ -74,7 +74,8 @@ const GlobalBar = () => {
   const user = AuthService.getCurrentUser();
   
   useEffect(() => {
-    console.log("locaiton", location)
+    window.scrollTo(0,0);
+
     setCurrent(mapCurrent(location.pathname.split("/")[1]))
     if (location.pathname.split("/")[2]) {
       handleBackBtn(true)
