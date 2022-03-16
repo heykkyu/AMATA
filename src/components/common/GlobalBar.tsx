@@ -102,7 +102,7 @@ const GlobalBar = () => {
   }
 
   const goUpPage = () => {
-    navigate(-1);
+    navigate("/");
   }
 
   return (

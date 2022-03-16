@@ -51,6 +51,7 @@ const CalBody = styled.div`
         top: 0;
         opacity: .8;
         font-size: 11px;
+        font-weight: bold;
         width: 20px;
       }
     }

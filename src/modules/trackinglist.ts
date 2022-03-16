@@ -51,7 +51,7 @@ export default function trackinglist(state: ListState = initialState, action: Li
     case ADD_TRACKING: 
       const newObj = {
         carrier: {
-          name: action.payload.carrier || "테스트",
+          name: action.payload.carrier || "Box",
           tracking_no: action.payload.tracking_no
         },
         shop: {},
@@ -63,7 +63,9 @@ export default function trackinglist(state: ListState = initialState, action: Li
       }
 
       const newState = [...state];
+      console.log('합 전', newState)
       newState.unshift(newObj);
+      console.log('합친뒤', newState)
       localStorage.setItem("parcel_list", JSON.stringify(newState))
       console.log("parcel_list", localStorage.getItem("parcel_list"))
       return newState;

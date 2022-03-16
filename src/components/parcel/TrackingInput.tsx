@@ -22,6 +22,7 @@ const FormWrap = styled.form`
     margin-top: 5px;
     width: 220px;
     padding: 10px 10px;
+    font-size: 14px;
     box-sizing: border-box;
   }
   button {
@@ -45,7 +46,8 @@ interface trackingType {
 const options: OptionType[] = [
   { value: "amazon", label: "Amazon" },
   { value: "usps", label: "USPS" },
-  { value: "cj", label: "CJ Delivery" }
+  { value: "cj", label: "CJ 대한통운" },
+  { value: "hanjin", label: "한진택배" }
 ];
 
 const TrackingInput = () => {
@@ -59,7 +61,6 @@ const TrackingInput = () => {
 
   const [selectedOption, setSelectedOption] = useState<OptionType>();
   const handleChangeSelect = (selectedOption:any) => {
-    console.log(selectedOption)
     setTrackingInfo(prev => ({
       ...prev,
       carrier: selectedOption.value
@@ -74,6 +75,13 @@ const TrackingInput = () => {
     }))
   }
 
+  const addNewEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addNewParcel();
+      e.preventDefault();
+    }
+  }
+  
   const addNewParcel = () => {
     if (!trackingInfo.carrier) {
       alert("You missed to choose carrier.");
@@ -84,14 +92,6 @@ const TrackingInput = () => {
       navigate(`/detail/${trackingInfo.tracking_no}`)
     }
   }
-
-  const addNewEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      addNewParcel();
-      e.preventDefault();
-    }
-  }
-  
 
   return (
     <>

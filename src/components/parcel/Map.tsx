@@ -5,9 +5,7 @@ import MapMarker from "@src/assets/img/map-marker-purple.png";
 const ParcelMapWrap = styled.div<Props>`
   .kakao-map {
     width: 100%;
-    /* height: ${(props) => props.from === 'list' ? '150px' : '40vh'}; */
     height: 200px;
-    /* position: relative; */
     margin-bottom: 20px;
   }
 `
@@ -46,6 +44,9 @@ const ParcelMap = ({carrier, shop, product, delivery, from}: Props) => {
       };
     
       let map = new kakao.maps.Map(container, options);
+      if (from === 'list') {
+        map.setZoomable(false);  
+      }
       map.relayout();
 
       var positions = [
