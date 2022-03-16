@@ -9,8 +9,9 @@ import { logout } from "@src/services/auth.service";
 
 const GlobalBarWrap = styled.div`
   text-align: left;
-  padding: 15px;
+  padding: 10px;
   position: relative;
+
 `
 const LogoBar = styled.div`
   position: relative;
@@ -56,9 +57,12 @@ const LoginTitle = styled.span`
 
 
 const LocalTitle = styled.div`
-  margin: 0 0 5px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin: 10px 0 5px;
+  padding: 5px 15px;
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 20px;
 `
 
 const GlobalBar = () => {

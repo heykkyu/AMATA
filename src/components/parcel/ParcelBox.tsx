@@ -31,7 +31,10 @@ const ParcelListWrap = styled.div`
 `
 const Block = styled.div`
   display: flex;
-  padding: 0 10px 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px 15px;
   min-height: 60px;
   box-sizing: border-box;
   &:hover {
@@ -43,8 +46,9 @@ const Block = styled.div`
 const BlockCarrierImg = styled.img`
   width: 50px;
   min-width: 50px;
-  height: auto;
+  height: 50px;
   border-radius: 50%;
+  object-fit: contain;
   border: 1px solid #ddd;
   text-align: center;
   box-sizing: border-box;
