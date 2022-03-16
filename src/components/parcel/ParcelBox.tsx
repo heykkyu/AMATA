@@ -2,38 +2,12 @@ import styled from 'styled-components'
 import { logo_list } from "@src/assets/data/LogoList";
 import default_box from "@src/assets/img/logo-box.png";
 
-interface Props {
-  type: String;
-}
 
-interface ParcelInfo {
-  carrier?: {
-    name?: string;
-    tracking_no?: string;
-    number?: any;
-  },
-  shop?: {
-    name?: string;
-    partner?: boolean;
-  };
-  product?: {
-    name?: string;
-    price?: string;
-    currency?: string;
-  };
-  delivery?: {
-    status: string;
-    logs?: any;
-  };
-}
-
-const ParcelListWrap = styled.div`
-`
 const Block = styled.div`
   display: flex;
   background-color: #fff;
   border-radius: 20px;
-  margin: 10px;
+  margin: 0 10px 10px;
   padding: 10px 15px;
   min-height: 60px;
   box-sizing: border-box;
@@ -84,27 +58,52 @@ const BlockShopImg = styled.img`
   object-fit: cover;
 `
 
+
+interface Props {
+  type: String;
+}
+
+interface ParcelInfo {
+  carrier?: {
+    name?: string;
+    tracking_no?: string;
+    number?: any;
+  },
+  shop?: {
+    name?: string;
+    partner?: boolean;
+  };
+  product?: {
+    name?: string;
+    price?: string;
+    currency?: string;
+  };
+  delivery?: {
+    status: string;
+    logs?: any;
+  };
+}
+
+
 const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
   return (
     <>
-      <ParcelListWrap>
-        <Block>
-          <BlockCarrierImg
-            src={logo_list.find((e) => e.name === carrier?.name?.toLocaleLowerCase())?.url || default_box }
-            alt={carrier?.name}
+      <Block>
+        <BlockCarrierImg
+          src={logo_list.find((e) => e.name === carrier?.name?.toLocaleLowerCase())?.url || default_box }
+          alt={carrier?.name}
+        />
+        <BlockParcelInfo>
+          <BlockParcelInfoText type="name">{product?.name || '택배'}</BlockParcelInfoText>
+          <BlockParcelInfoText type="status">{delivery?.status}</BlockParcelInfoText>
+        </BlockParcelInfo>
+        {shop?.name && (
+          <BlockShopImg
+            src={logo_list.find((e) => e.name === shop?.name?.toLocaleLowerCase())?.url || default_box }
+            alt={shop.name}
           />
-          <BlockParcelInfo>
-            <BlockParcelInfoText type="name">{product?.name || '택배'}</BlockParcelInfoText>
-            <BlockParcelInfoText type="status">{delivery?.status}</BlockParcelInfoText>
-          </BlockParcelInfo>
-          {shop?.name && (
-            <BlockShopImg
-              src={logo_list.find((e) => e.name === shop?.name?.toLocaleLowerCase())?.url || default_box }
-              alt={shop.name}
-            />
-          )}
-        </Block>
-      </ParcelListWrap>
+        )}
+      </Block>
     </>
   );
 }

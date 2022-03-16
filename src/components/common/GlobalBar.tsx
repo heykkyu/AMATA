@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import { MdKeyboardBackspace } from "react-icons/md";
+import { pallete } from "@src/assets/css/pallete"
 import * as AuthService from "@src/services/auth.service";
 import styled from 'styled-components'
 import { logout } from "@src/services/auth.service";
@@ -57,7 +58,7 @@ const LoginTitle = styled.span`
 
 
 const LocalTitle = styled.div`
-  background-color: #fff;
+  background-color: ${pallete.tangleBack};
   border-radius: 20px;
   margin: 10px 0 5px;
   padding: 5px 15px;

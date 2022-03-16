@@ -6,6 +6,15 @@ import moment from "moment";
 import 'moment/locale/ko';
 import StarYellow from "@src/assets/img/star-yellow.png";
 import StarBlack from "@src/assets/img/star-black.png";
+import { pallete, common } from "@src/assets/css/pallete";
+
+const Component = styled.div`
+  background: ${pallete.tangleBack};
+  min-height: ${common.emitHead};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
 const CalHead = styled.div`
   margin: 30px 0 10px;
@@ -152,34 +161,32 @@ const ParcelEvent = () => {
   };
 
   return (
-    <>
-      <div style={{background: "white", marginTop: "15px"}}>
-        <Lottie
-          loop
-          animationData={giftlottie}
-          style={{ height: 300 }}
-          play
-        />
-        <strong>한달간 매일 출석시 행운의 선물을 드립니다.</strong>
+    <Component>
+      <Lottie
+        loop
+        animationData={giftlottie}
+        style={{ height: 300 }}
+        play
+      />
+      <strong>한달간 매일 출석시 행운의 선물을 드립니다.</strong>
 
-        <>
-          <CalHead>
-            <h1>{moment().format("MM")}월</h1>
-            <div>
-              {["일", "월", "화", "수", "목", "금", "토"].map((el) => (
-                <div key={el} className="calhead-name">
-                  <p>{el}</p>
-                </div>
-              ))}
-            </div>
-          </CalHead>
-          <CalBody>{generate()}</CalBody>
-        </>
-        <Guide>
-          <p>행운의 선물은 다음달 7일에 문자메시지로 발송됩니다.</p>
-        </Guide>
-      </div>
-    </>
+      <>
+        <CalHead>
+          <h1>{moment().format("MM")}월</h1>
+          <div>
+            {["일", "월", "화", "수", "목", "금", "토"].map((el) => (
+              <div key={el} className="calhead-name">
+                <p>{el}</p>
+              </div>
+            ))}
+          </div>
+        </CalHead>
+        <CalBody>{generate()}</CalBody>
+      </>
+      <Guide>
+        <p>행운의 선물은 다음달 7일에 문자메시지로 발송됩니다.</p>
+      </Guide>
+    </Component>
   );
 }
 
