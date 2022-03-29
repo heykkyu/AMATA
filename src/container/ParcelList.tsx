@@ -1,25 +1,43 @@
 import ParcelBox from "@src/components/parcel/ParcelBox"
 import Map from "@src/components/parcel/Map"
-import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { loadTrackingList } from '@src/modules/trackinglist';
-import { RootState } from '../modules';
+import { RootState } from '@src/modules';
+import { getList } from "@src/api/list"
+import { parcle_list }from "@src/utils/DummyList"
+
 
 const ParcelList = () => {
-  const dispatch = useDispatch();
   const parcelList = useSelector((state: RootState) => state.trackinglist);
-  console.log()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const fetchApi = async () => {
+    
+    try {
+      let saved_storage = JSON.parse(localStorage.getItem('parcel_list') || '[]');
+      if (saved_storage.length === 0) {
+        await getList();
+        dispatch(loadTrackingList(parcle_list));
+        localStorage.setItem("parcel_list", JSON.stringify(parcle_list))
+      } else {
+        dispatch(loadTrackingList(saved_storage));
+      }
+    } catch (e) {
+
+    }
+  }
+
   useEffect(() => {
-    dispatch(loadTrackingList());
+    fetchApi();
   }, [])
 
   return (
     <>
-        {parcelList?.map((data) => {
+      {/* TBA: Array 타입 선언 및 정리 */}
+        {parcelList?.data.map((data: any) => {
           return (
             <div key={data.carrier?.tracking_no}>
             

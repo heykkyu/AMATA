@@ -1,11 +1,12 @@
-import { parcle_list }from "@src/utils/DummyList"
-import axios from "axios";
 
 const LOAD_TRACKING_LIST = 'parcel/LOAD_TRACKING_LIST' as const;
 const ADD_TRACKING = 'parcel/ADD_TRACKING' as const;
 
-export const loadTrackingList = () => ({
+export const loadTrackingList = (data: object[]) => ({
   type: LOAD_TRACKING_LIST,
+  payload: {
+    data
+  }
 });
 
 export const addTracking = (carrier: string, tracking_no: string) => ({
@@ -20,34 +21,38 @@ type ListAction =
   | ReturnType<typeof loadTrackingList>
   | ReturnType<typeof addTracking>
 
-export type List = {
-  carrier: {
-    name: string,
-    tracking_no: string,
-  },
-  shop: {},
-  product: {},
-  delivery: {
-    status: string,
-    logs: string[]
-  }
+type ListState = {
+  // carrier: {
+  //   name: string,
+  //   tracking_no: string,
+  // },
+  // shop: {},
+  // product: {},
+  // delivery: {
+  //   status: string,
+  //   logs: string[]
+  // }
+  loading: boolean,
+  error: boolean,
+  data: Array<object>
 };
-type ListState = List[];
+// type  = List[];
 
-const initialState: ListState = [];
+const initialState: ListState = {
+  loading: false,
+  error: false,
+  data: []
+};
 
 export default function trackinglist(state: ListState = initialState, action: ListAction): ListState {
   switch (action.type) {
     case LOAD_TRACKING_LIST:
-      const list = localStorage.getItem("parcel_list") || "";
-      if (list && list.length > 0) {
-        return JSON.parse(list);
-      } else {
-        let result:ListState = [];
-        getParcelList().then(res => result = res);
-        return result;
-      }
 
+      return {
+        ...state,
+        loading: false,
+        data: action.payload.data || []
+      }
     case ADD_TRACKING: 
       const newObj = {
         carrier: {
@@ -62,13 +67,14 @@ export default function trackinglist(state: ListState = initialState, action: Li
         }
       }
 
-      const newState = [...state];
-      console.log('합 전', newState)
+      const newState = [...state.data];
       newState.unshift(newObj);
-      console.log('합친뒤', newState)
       localStorage.setItem("parcel_list", JSON.stringify(newState))
-      console.log("parcel_list", localStorage.getItem("parcel_list"))
-      return newState;
+      return {
+        ...state,
+        data: newState
+      };
+      
     default:
       return state;
   }
@@ -76,12 +82,14 @@ export default function trackinglist(state: ListState = initialState, action: Li
 
 
 const getParcelList = async () => {
-  try {
-    const res = await axios.get<any[]>('https://jsonplaceholder.typicode.com/posts/1');
-    localStorage.setItem("parcel_list", JSON.stringify(parcle_list))
-    return res.data;
-  } catch (e) {
-    alert(e)
-    return [];
-  }
+  // try {
+  //   const res = await getList();
+  //   alert()
+  //   // const res = await axios.get<any[]>('https://jsonplaceholder.typicode.com/posts/1');
+  //   localStorage.setItem("parcel_list", JSON.stringify(parcle_list))
+  //   return res.data;
+  // } catch (e) {
+  //   alert(e)
+  //   return [];
+  // }
 }

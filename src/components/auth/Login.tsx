@@ -2,8 +2,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { login } from "@src/services/auth.service";
 import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { doSignin } from '@src/modules/auth';
+import { RootState } from '@src/modules';
 
 const AuthLoginWrap = styled.div`
   .loginbox {
@@ -51,6 +54,8 @@ const AuthLoginWrap = styled.div`
 
 const AuthLogin = () => {
   const navigate = useNavigate();
+  const authInfo = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -64,13 +69,12 @@ const AuthLogin = () => {
     }))
   }
   const handleLogin = () => {
-    login(form.email, form.password).then(
-      () => {
-        navigate("/");
-        window.location.reload();
-      }
-    )
+    dispatch(doSignin(form.email, form.password));
   }
+
+  useEffect(() => {
+    console.log('authInfo', authInfo)
+  }, [authInfo])
 
   return (
     <>

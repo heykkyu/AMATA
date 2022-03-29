@@ -46,8 +46,13 @@ const BlockParcelInfoText = styled.p<Props>`
   margin: 0;
   font-size: 14px;
   line-height: 20px;
+  max-width: 80%;
   font-weight: ${(props) => props.type === 'status' ? 'bold' : 'normal'}; 
   padding-top: ${(props) => props.type === 'status' ? '3px' : '0'}; 
+  .status-text { 
+    width: 100px;
+    display: inline-block;
+  }
 `
 
 const BlockShopImg = styled.img`
@@ -97,7 +102,10 @@ const ParcelBox = ({carrier, shop, product, delivery}: ParcelInfo) => {
         />
         <BlockParcelInfo>
           <BlockParcelInfoText type="name">{product?.name || '택배'}</BlockParcelInfoText>
-          <BlockParcelInfoText type="status">{delivery?.status}</BlockParcelInfoText>
+          <BlockParcelInfoText type="status">
+            <span className="status-text">{delivery?.status} </span>
+            <span>{carrier?.tracking_no}</span>
+          </BlockParcelInfoText>
         </BlockParcelInfo>
         {shop?.name && (
           <BlockShopImg
