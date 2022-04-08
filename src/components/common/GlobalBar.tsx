@@ -5,9 +5,8 @@ import { Link } from "react-router-dom"
 import { MdKeyboardBackspace } from "react-icons/md";
 import { pallete } from "@src/assets/css/pallete"
 import { useDispatch, useSelector } from 'react-redux';
-import * as AuthService from "@src/services/auth.service";
 import styled from 'styled-components'
-import { logout } from "@src/services/auth.service";
+import { logout } from "@src/modules/auth";
 import { RootState } from '@src/modules';
 
 const GlobalBarWrap = styled.div`

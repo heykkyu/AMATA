@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AppLoad from "./components/common/AppLoad";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
 import AuthLogin from "./components/auth/Login";
@@ -11,8 +11,9 @@ import ParcelAdd from "./container/ParcelAdd";
 import ParcelEvent from "./container/ParcelEvent";
 import ParcelProfile from "./container/ParcelProfile";
 // import LoggedInRoute from "./views/AuthInRoute";
-import * as AuthService from "@src/services/auth.service";
-
+import { RootState } from '@src/modules';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkLoginStatus } from '@src/modules/auth';
 // import { signIn } from '@src/state/auth/auth';
 import "@src/assets/css/_common.scss";
 
@@ -23,21 +24,21 @@ import "@src/assets/css/_common.scss";
 }
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState<UserType | undefined>(undefined);
- 
+  const { isLogedIn } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
     const userLanguage = navigator.language;
     if (userLanguage && userLanguage.includes("ko-")) {
       localStorage.setItem("lang", "ko");
     } else {
       localStorage.setItem("lang", userLanguage);
     }
-    if (user) {
-      setCurrentUser(user);
-    }
-
   }, [])
+
+  useEffect(() => {
+    dispatch(checkLoginStatus());
+  }, [])
+  
 
 
   return (
@@ -45,7 +46,7 @@ const App = () => {
       <Router>
         <GlobalBar/>
         <Routes>
-          {!currentUser ? (
+          {!isLogedIn ? (
             <>
               <Route path='/login' element={<AuthLogin/>} />
               <Route path='*' element={<AppLoad/>} />
@@ -60,7 +61,7 @@ const App = () => {
             </>
           )}
         </Routes>
-        {currentUser && (
+        {isLogedIn && (
           <GlobalMap/>
         )}
       </Router>

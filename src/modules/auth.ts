@@ -2,6 +2,8 @@ import axios from "axios";
 const baseUrl = `${process.env.REACT_APP_API_URL}`;
 
 const SIGNIN = 'auth/LOGIN';
+const LOGINSTATUS = 'auth/LOGINSTATUS'
+
 
 export const doSignin = (email: string, password: string) => ({
   type: SIGNIN,
@@ -10,6 +12,10 @@ export const doSignin = (email: string, password: string) => ({
     password,
   }
 });
+
+export const checkLoginStatus = () => ({
+  type: LOGINSTATUS
+})
 
 type AuthAction =
   | ReturnType<typeof doSignin>
@@ -39,12 +45,30 @@ export default function auth(state: AuthState = initialState, action: AuthAction
     case SIGNIN: 
       login(action.payload.email, action.payload.password);
       return {
-        ...state,
         email: action.payload.email,
         password: action.payload.password,
         loading: false,
         isLogedIn: true
       };
+
+    case LOGINSTATUS: 
+      if (localStorage.getItem("user")) {
+        return {
+          ...state,
+          loading: false,
+          isLogedIn: true
+        };
+
+      } else {
+        return {
+          ...state,
+          loading: false,
+          isLogedIn: false
+        };
+
+      }
+
+
     default:
       return state;
   }

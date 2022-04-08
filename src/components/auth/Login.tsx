@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { doSignin } from '@src/modules/auth';
 import { RootState } from '@src/modules';
+import { checkLoginStatus } from '@src/modules/auth';
 
 const AuthLoginWrap = styled.div`
   .loginbox {
@@ -55,7 +56,6 @@ const AuthLoginWrap = styled.div`
 const AuthLogin = () => {
   const navigate = useNavigate();
   const { isLogedIn } = useSelector((state: RootState) => state.auth);
-  const authInfo = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "test@brownbox.com",
