@@ -2,12 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { doSignin } from '@src/modules/auth';
-import { RootState } from '@src/modules';
-import { checkLoginStatus } from '@src/modules/auth';
 
 const AuthLoginWrap = styled.div`
   .loginbox {
@@ -54,8 +50,6 @@ const AuthLoginWrap = styled.div`
 `
 
 const AuthLogin = () => {
-  const navigate = useNavigate();
-  const { isLogedIn } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "test@brownbox.com",
@@ -73,45 +67,37 @@ const AuthLogin = () => {
     dispatch(doSignin(form.email, form.password));
   }
 
-  useEffect(() => {
-    if (isLogedIn) {
-      navigate("/")
-    }
-  }, [isLogedIn])
-
   return (
-    <>
-      <AuthLoginWrap>
-        <div className="loginbox">
-          <TextField 
-            id="outlined-basic" 
-            label="Email" 
-            variant="outlined" 
-            name="email" 
-            value={form.email} 
-            onChange={handleInput} 
-            placeholder="Type Any Text"
-          />
-          <TextField 
-            id="outlined-basic" 
-            label="Password" 
-            variant="outlined" 
-            name="password" 
-            type="password" 
-            value={form.password} 
-            onChange={handleInput}
-            placeholder="Type Any Text"
-          />
-          <Button 
-            onClick={() => handleLogin()} 
-            variant="contained" 
-            color="primary"
-          >Login</Button>
-          <p className="loginguide">
-            <span className="loginguide-logo">BrownBox</span>를 사용하면 <span className="loginguide-privacy">개인정보처리방침</span>에 동의하는 것으로 간주됩니다.</p>
-        </div>
-      </AuthLoginWrap>
-    </>
+    <AuthLoginWrap>
+      <div className="loginbox">
+        <TextField 
+          id="outlined-basic" 
+          label="Email" 
+          variant="outlined" 
+          name="email" 
+          value={form.email} 
+          onChange={handleInput} 
+          placeholder="Type Any Text"
+        />
+        <TextField 
+          id="outlined-basic" 
+          label="Password" 
+          variant="outlined" 
+          name="password" 
+          type="password" 
+          value={form.password} 
+          onChange={handleInput}
+          placeholder="Type Any Text"
+        />
+        <Button 
+          onClick={() => handleLogin()} 
+          variant="contained" 
+          color="primary"
+        >Login</Button>
+        <p className="loginguide">
+          <span className="loginguide-logo">BrownBox</span>를 사용하면 <span className="loginguide-privacy">개인정보처리방침</span>에 동의하는 것으로 간주됩니다.</p>
+      </div>
+    </AuthLoginWrap>
   );
 }
 

@@ -136,7 +136,6 @@ const GlobalBar = () => {
               ) }
             </Title>
           </LogoBar>
-          {isLogedIn ? "T" : "F"}
         {isLogedIn && (
           <LocalTitle>
             <p>{current}</p>

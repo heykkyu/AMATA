@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AppLoad from "./components/common/AppLoad";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import GlobalBar from "./components/common/GlobalBar";
 import GlobalMap from "./components/common/GlobalMap";
 import AuthLogin from "./components/auth/Login";
@@ -26,7 +26,10 @@ import "@src/assets/css/_common.scss";
 const App = () => {
   const { isLogedIn } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
+  
   useEffect(() => {
+    dispatch(checkLoginStatus());
+
     const userLanguage = navigator.language;
     if (userLanguage && userLanguage.includes("ko-")) {
       localStorage.setItem("lang", "ko");
@@ -35,20 +38,23 @@ const App = () => {
     }
   }, [])
 
-  useEffect(() => {
-    dispatch(checkLoginStatus());
-  }, [])
-  
-
-
   return (
     <div className="App">
       <Router>
         <GlobalBar/>
         <Routes>
+          <Route
+            path="/login"
+            element={
+              isLogedIn ? (
+                <Navigate replace to="/"/>
+              ) : (
+                <AuthLogin/>
+              )
+            }
+          />
           {!isLogedIn ? (
             <>
-              <Route path='/login' element={<AuthLogin/>} />
               <Route path='*' element={<AppLoad/>} />
             </>
           ) : (
