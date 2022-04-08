@@ -1,4 +1,3 @@
-import { ThunkAction } from 'redux-thunk';
 import axios from "axios";
 const baseUrl = `${process.env.REACT_APP_API_URL}`;
 
@@ -15,21 +14,37 @@ export const doSignin = (email: string, password: string) => ({
 type AuthAction =
   | ReturnType<typeof doSignin>
 
-export type AuthType = {
+// export type AuthType = {
+//   email: string,
+//   password: string,
+//   loading: false,
+//   isLogedIn: false,
+// };
+type AuthState = {
   email: string,
   password: string,
+  loading: boolean,
+  isLogedIn: boolean,
+};
+
+const initialState: AuthState = {
+  email: "",
+  password: "",
   loading: false,
   isLogedIn: false,
 };
-type AuthState = AuthType[];
-
-const initialState: AuthState = [];
 
 export default function auth(state: AuthState = initialState, action: AuthAction): AuthState {
   switch (action.type) {
     case SIGNIN: 
       login(action.payload.email, action.payload.password);
-      return state;
+      return {
+        ...state,
+        email: action.payload.email,
+        password: action.payload.password,
+        loading: false,
+        isLogedIn: true
+      };
     default:
       return state;
   }

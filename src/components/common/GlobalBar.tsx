@@ -4,9 +4,11 @@ import { useLocation, useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import { MdKeyboardBackspace } from "react-icons/md";
 import { pallete } from "@src/assets/css/pallete"
+import { useDispatch, useSelector } from 'react-redux';
 import * as AuthService from "@src/services/auth.service";
 import styled from 'styled-components'
 import { logout } from "@src/services/auth.service";
+import { RootState } from '@src/modules';
 
 const GlobalBarWrap = styled.div`
   text-align: left;
@@ -67,11 +69,11 @@ const LocalTitle = styled.div`
 `
 
 const GlobalBar = () => {
+  const { isLogedIn } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
   const navigate = useNavigate();
   const [current, setCurrent] = useState("");
   const [backBtn, handleBackBtn] = useState(false);
-  const user = AuthService.getCurrentUser();
   
   useEffect(() => {
     window.scrollTo(0,0);
@@ -114,35 +116,33 @@ const GlobalBar = () => {
   return (
     <>
       <GlobalBarWrap>
-        {/* not logged in? */}
-        <LogoBar>
-          <LogoBack onClick={goUpPage}>
-            {backBtn && (
-              <MdKeyboardBackspace/>
-            )}
-          </LogoBack>
-          <Title>
-            <Link to="/">
-              <LogoTitle>BROWN BOX</LogoTitle>
-            </Link>
-            {!user ? (
-              <Link to="/login">
-                <LoginTitle>Log In</LoginTitle>
+          <LogoBar>
+            <LogoBack onClick={goUpPage}>
+              {backBtn && (
+                <MdKeyboardBackspace/>
+              )}
+            </LogoBack>
+            <Title>
+              <Link to="/">
+                <LogoTitle>BROWN BOX</LogoTitle>
               </Link>
-            ) : (
-              <a onClick={() => logout()}>
-                <LoginTitle>Log Out</LoginTitle>
-              </a>
-            ) }
-          {/* <Hamburger/> */}
-          </Title>
-
-        </LogoBar>
-
-        {/* logged in */}
-        <LocalTitle>
-          <p>{current}</p>
-        </LocalTitle>
+              {!isLogedIn ? (
+                <Link to="/login">
+                  <LoginTitle>Log In</LoginTitle>
+                </Link>
+              ) : (
+                <a onClick={() => logout()}>
+                  <LoginTitle>Log Out</LoginTitle>
+                </a>
+              ) }
+            </Title>
+          </LogoBar>
+          {isLogedIn ? "T" : "F"}
+        {isLogedIn && (
+          <LocalTitle>
+            <p>{current}</p>
+          </LocalTitle>
+        )}
       </GlobalBarWrap>
     </>
   );

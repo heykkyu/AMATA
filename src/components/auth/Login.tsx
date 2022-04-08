@@ -54,11 +54,12 @@ const AuthLoginWrap = styled.div`
 
 const AuthLogin = () => {
   const navigate = useNavigate();
-  const authInfo = useSelector((state: RootState) => state.auth);
+  const { isLogedIn } = useSelector((state: RootState) => state.auth);
+  const authInfo = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: "test@brownbox.com",
+    password: "1234",
   })
 
   const handleInput = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -73,8 +74,10 @@ const AuthLogin = () => {
   }
 
   useEffect(() => {
-    console.log('authInfo', authInfo)
-  }, [authInfo])
+    if (isLogedIn) {
+      navigate("/")
+    }
+  }, [isLogedIn])
 
   return (
     <>
